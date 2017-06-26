@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <title>Hello World</title>
+</head>
+
+<body>
+  <h1>Você precisa entrar com sua conta Google</h1>
+
+  <button>Login com Google</button>
+
+  <div class="error">
+
+  </div>
+
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+  <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDfV96KJVPUgALyzSStNuZf1rwRIxhpzHA",
+    authDomain: "fabmec-5c1d0.firebaseapp.com",
+    databaseURL: "https://fabmec-5c1d0.firebaseio.com",
+    projectId: "fabmec-5c1d0",
+    storageBucket: "fabmec-5c1d0.appspot.com",
+    messagingSenderId: "964841337543"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<script type="text/javascript">
+  app.initialize();
+</script>
+
+<script type="text/javascript">
+
+  firebase.auth().onAuthStateChanged(function(usuario) {
+    if (usuario) {
+      window.location = 'index.html';
+    }
+  });
+
+  const bt = document.querySelector('button');
+  bt.addEventListener('click', function() {
+      //const provider = firebase.auth.GoogleAuthProvider();
+      var provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope('https://www.googleapis.com/auth/spreadsheets.readonly');
+      firebase.auth().signInWithRedirect(provider);
+    });
+
+  </script>
+
+</body>
+
+</html>
